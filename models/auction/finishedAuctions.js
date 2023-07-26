@@ -5,7 +5,7 @@ function getFinishedAuctions() {
     let result;
     let date = DateTime.now().toFormat('y-LL-dd HH:mm:ss');
     db.query(
-        `SELECT * FROM auctions WHERE offers_stop < ${date}`,
+        `SELECT * FROM auctions WHERE offers_stop < '${date}'`,
         function (err, results) {
             result = results;
         }
