@@ -7,5 +7,7 @@ MariaDB, NodeJS, npm
 ## Uruchomienie
 
 $ sudo mariadb < dbBuild.sql
+
 $ npm ci
+
 $ npm start
