@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+    h1= title
+    form(method='post' action='/add-auction-to-db')
+        label(for='auction_title') Nazwa przetargu
+        br
+        input(type='text' id='auction_title' name='auction_title')
+        br
+        label(for='offers_start') Czas rozpoczęcia przyjmowania ofert
+        br
+        input(type='datetime-local' id='offers_start' name='offers_start')
+        br
+        label(for='offers_stop') Czas zakończenia przyjmowania ofert
+        br
+        input(type='datetime-local' id='offers_stop' name='offers_stop')
+        br
+        textarea(name='description') Opis przetargu
+        br
+        label(for='contracting_party') Instytucja zamawiająca
+        br
+        input(type='text' id='contracting_party' name='contracting_party')
+        br
+        label(for='max_value') Maksymalna zapłata za ofertę
+        br
+        input(type='number' id='max_value' name='max_value' min='0' max='99999999.99' step='0.01')
+        br
+        input(type='submit' value='Dodaj przetarg')

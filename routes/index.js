@@ -4,6 +4,7 @@ var router = express.Router();
 const getCurrentAuctions = require('../models/auction/currentAuctions.js');
 const getFinishedAuctions = require('../models/auction/finishedAuctions.js');
 const getCurrentAuctionById = require('../models/auction/currentAuctionById.js');
+const addAuction = require('../models/auction/addAuction.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,8 +29,14 @@ router.get('/auctions/:id', function(req, res) {
   });
 });
 
-// router.get('/add-auction', function(req, res) {
-//   res.render('')
-// });
+router.get('/add-auction', function(req, res) {
+  res.render('auction/addAuction', { title: 'Dodawanie przetargu' });
+});
+
+router.post('/add-auction-to-db', function(req, res) {
+  addAuction(req.body, function() {
+    res.redirect('/auctions');
+  });
+});
 
 module.exports = router;
