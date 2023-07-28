@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1= title
+    if data.length == 1
+        h2= data[0].auction_title
+        div
+            h3 Terminy:
+            p Początek składania ofert: #{data[0].offers_start}
+            |
+            |
+            p Koniec składania ofert: #{data[0].offers_stop}
+        div
+            h3 Opis przetargu:
+            p= data[0].description
+        div
+            h3 Instytucja zamawiająca:
+            p= data[0].contracting_party
+    else
+        p Przetarg o podanym identyfikatorze nie istnieje.

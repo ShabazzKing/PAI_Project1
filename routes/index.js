@@ -3,6 +3,7 @@ var router = express.Router();
 
 const getCurrentAuctions = require('../models/auction/currentAuctions.js');
 const getFinishedAuctions = require('../models/auction/finishedAuctions.js');
+const getCurrentAuctionById = require('../models/auction/currentAuctionById.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,6 +19,12 @@ router.get('/auctions', function(req, res) {
 router.get('/auctions-finished', function(req, res) {
   getFinishedAuctions(function(data) {
     res.render('finishedAuctions', { title: 'Lista zakończonych przetargów', data: data });
+  });
+});
+
+router.get('/auctions/:id', function(req, res) {
+  getCurrentAuctionById(req.params.id, function(data) {
+    res.render('currentAuctionById', { title: 'Szczegóły przetargu', data: data });
   });
 });
 
