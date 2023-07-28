@@ -12,7 +12,7 @@ block content
             each val, index in data
                 tr
                     td= index + 1
-                    td: a(href='/auctions/' + val.auction_id)= val.auction_title
+                    td: a(href='/auctions/'+val.auction_id)= val.auction_title
                     td= val.offers_start
                     td= val.offers_stop
     else
