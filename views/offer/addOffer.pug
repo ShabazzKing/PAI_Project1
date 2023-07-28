@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    h1= title
+    form(method='post' action='/add-offer-to-db/'+auctionId)
+        input(type='number' name='auction_id' hidden value=auctionId)
+        label(for='contractor') Oferent
+        br
+        input(type='text' id='contractor' name='contractor')
+        br
+        label(for='offer_value') Oferowana cena
+        br
+        input(type='number' id='offer_value' name='offer_value' min='0' max='99999999.99' step='0.01')
+        br
+        input(type='submit' value='Dodaj ofertę przetargową')

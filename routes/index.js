@@ -5,6 +5,7 @@ const getCurrentAuctions = require('../models/auction/currentAuctions.js');
 const getFinishedAuctions = require('../models/auction/finishedAuctions.js');
 const getCurrentAuctionById = require('../models/auction/currentAuctionById.js');
 const addAuction = require('../models/auction/addAuction.js');
+const addOffer = require('../models/offer/addOffer.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -36,6 +37,16 @@ router.get('/add-auction', function(req, res) {
 router.post('/add-auction-to-db', function(req, res) {
   addAuction(req.body, function() {
     res.redirect('/auctions');
+  });
+});
+
+router.get('/auctions/:id/add-offer', function(req, res) {
+  res.render('offer/addOffer', { title: 'Dodawanie oferty do przetargu', auctionId: req.params.id });
+});
+
+router.post('/add-offer-to-db/:id', function(req, res) {
+  addOffer(req.body, function() {
+    res.redirect('/auctions/' + req.params.id);
   });
 });
 

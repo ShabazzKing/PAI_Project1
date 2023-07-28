@@ -4,6 +4,7 @@ block content
     h1= title
     if data.length == 1
         h2= data[0].auction_title
+        a(href='/auctions/'+data[0].auction_id+'/add-offer'): button(type='button') Złóż ofertę przetargową
         div
             h3 Terminy:
             p Początek składania ofert: #{data[0].offers_start}
