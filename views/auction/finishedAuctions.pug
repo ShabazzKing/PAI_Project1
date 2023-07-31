@@ -7,13 +7,11 @@ block content
             tr
                 th Nr
                 th Nazwa
-                th Początek
-                th Koniec
+                th Stan
             each val, index in data
                 tr
                     td= index + 1
-                    td= val.auction_title
-                    td= val.offers_start
-                    td= val.offers_stop
+                    td: a(href='/auctions-finished/'+val.auction_id)= val.auction_title
+                    td Przetarg zakończony
     else
         p Brak zakończonych przetargów

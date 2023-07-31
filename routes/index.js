@@ -9,6 +9,7 @@ const getCurrentAuctionById = require('../models/auction/currentAuctionById.js')
 const addAuction = require('../models/auction/addAuction.js');
 const addOffer = require('../models/offer/addOffer.js');
 const auctionActive = require('../models/auction/auctionActive.js');
+const getOffersForFinishedAuction = require('../models/offer/offersForFinishedAuction.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -30,6 +31,19 @@ router.get('/auctions-finished', function(req, res) {
 router.get('/auctions/:id', function(req, res) {
   getCurrentAuctionById(req.params.id, function(data) {
     res.render('auction/currentAuctionById', { title: 'Szczegóły przetargu', data: data });
+  });
+});
+
+router.get('/auctions-finished/:id', function(req, res) {
+  auctionActive(req.params.id, function(result) {
+    let date = DateTime.now();
+    if (date > DateTime.fromJSDate(result[0].offers_stop)) {
+      getOffersForFinishedAuction(req.params.id, function(data) {
+        res.render('auction/finishedAuctionById', { title: 'Lista ofert', data: data });
+      });
+    } else {
+      res.render('auction/auctionStillActive');
+    }
   });
 });
 

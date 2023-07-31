@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+    h1= title
+    if data.length > 0
+        table
+            tr
+                th Nr
+                th Oferent
+                th Wartość oferty
+            each val, index in data
+                tr
+                    td= index + 1
+                    td= val.contractor
+                    td= val.offer_value + ' PLN'
+    else
+        p Przetarg zakończony bez rozstrzygnięcia
