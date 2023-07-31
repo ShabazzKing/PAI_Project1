@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
+const {DateTime} = require('luxon');
+
 const getCurrentAuctions = require('../models/auction/currentAuctions.js');
 const getFinishedAuctions = require('../models/auction/finishedAuctions.js');
 const getCurrentAuctionById = require('../models/auction/currentAuctionById.js');
 const addAuction = require('../models/auction/addAuction.js');
 const addOffer = require('../models/offer/addOffer.js');
+const auctionActive = require('../models/auction/auctionActive.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -41,7 +44,14 @@ router.post('/add-auction-to-db', function(req, res) {
 });
 
 router.get('/auctions/:id/add-offer', function(req, res) {
-  res.render('offer/addOffer', { title: 'Dodawanie oferty do przetargu', auctionId: req.params.id });
+  auctionActive(req.params.id, function(result) {
+    let date = DateTime.now();
+    if (date > DateTime.fromJSDate(result[0].offers_start) && date < DateTime.fromJSDate(result[0].offers_stop)) {
+      res.render('offer/addOffer', { title: 'Dodawanie oferty do przetargu', auctionId: req.params.id });
+    } else {
+      res.render('offer/noOfferAdding');
+    }
+  });
 });
 
 router.post('/add-offer-to-db/:id', function(req, res) {
