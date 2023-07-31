@@ -36,13 +36,17 @@ router.get('/auctions/:id', function(req, res) {
 
 router.get('/auctions-finished/:id', function(req, res) {
   auctionActive(req.params.id, function(result) {
-    let date = DateTime.now();
-    if (date > DateTime.fromJSDate(result[0].offers_stop)) {
-      getOffersForFinishedAuction(req.params.id, function(data) {
-        res.render('auction/finishedAuctionById', { title: 'Lista ofert', data: data });
-      });
+    if (result.length == 1) {
+      let date = DateTime.now();
+      if (date > DateTime.fromJSDate(result[0].offers_stop)) {
+        getOffersForFinishedAuction(req.params.id, function(data) {
+          res.render('auction/finishedAuctionById', { title: 'Lista ofert', data: data });
+        });
+      } else {
+        res.render('auction/auctionStillActive');
+      }
     } else {
-      res.render('auction/auctionStillActive');
+      res.render('auction/auctionNotExists');
     }
   });
 });
@@ -59,11 +63,15 @@ router.post('/add-auction-to-db', function(req, res) {
 
 router.get('/auctions/:id/add-offer', function(req, res) {
   auctionActive(req.params.id, function(result) {
-    let date = DateTime.now();
-    if (date > DateTime.fromJSDate(result[0].offers_start) && date < DateTime.fromJSDate(result[0].offers_stop)) {
-      res.render('offer/addOffer', { title: 'Dodawanie oferty do przetargu', auctionId: req.params.id });
+    if (result.length == 1) {
+      let date = DateTime.now();
+      if (date > DateTime.fromJSDate(result[0].offers_start) && date < DateTime.fromJSDate(result[0].offers_stop)) {
+        res.render('offer/addOffer', { title: 'Dodawanie oferty do przetargu', auctionId: req.params.id });
+      } else {
+        res.render('offer/noOfferAdding');
+      }
     } else {
-      res.render('offer/noOfferAdding');
+      res.render('auction/auctionNotExists');
     }
   });
 });
