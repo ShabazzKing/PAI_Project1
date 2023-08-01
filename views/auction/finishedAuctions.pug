@@ -3,14 +3,16 @@ extends ../layout
 block content
     h1= title
     if data.length > 0
-        table
-            tr
-                th Nr
-                th Nazwa
-                th Stan
+        table.table
+            thead
+                tr
+                    th(scope='col') Nr
+                    th(scope='col') Nazwa
+                    th(scope='col') Stan
+            tbody
             each val, index in data
                 tr
-                    td= index + 1
+                    td(scope='row')= index + 1
                     td: a(href='/auctions-finished/'+val.auction_id)= val.auction_title
                     td Przetarg zakończony
     else

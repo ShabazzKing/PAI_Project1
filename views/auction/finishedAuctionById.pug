@@ -3,14 +3,16 @@ extends ../layout
 block content
     h1= title
     if data.length > 0
-        table
-            tr
-                th Nr
-                th Oferent
-                th Wartość oferty
+        table.table
+            thead
+                tr
+                    th(scope='col') Nr
+                    th(scope='col') Oferent
+                    th(scope='col') Wartość oferty
+            tbody
             each val, index in data
                 tr
-                    td= index + 1
+                    td(scope='row')= index + 1
                     td= val.contractor
                     td= val.offer_value + ' PLN'
     else

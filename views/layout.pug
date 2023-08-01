@@ -2,17 +2,23 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    // link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
   body
-    nav
-      a(href='/') Strona główna
-      |
-      |
-      a(href='/auctions') Lista przetargów
-      |
-      |
-      a(href='/auctions-finished') Lista zakończonych przetargów
-      |
-      |
-      a(href='/add-auction') Dodaj przetarg
-    block content
+    div(class='px-5 py-5 my-5 text-center')
+      div(class='d-flex justify-content-center py-3')
+        nav.nav
+          a.nav-link( href='/') Strona główna
+          |
+          |
+          a.nav-link(href='/auctions') Lista przetargów
+          |
+          |
+          a.nav-link(href='/auctions-finished') Lista zakończonych przetargów
+          |
+          |
+          a.nav-link(href='/add-auction') Dodaj przetarg
+      block content
+    script(src='/js/bootstrap.bundle.min.js')

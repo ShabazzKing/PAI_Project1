@@ -2,27 +2,22 @@ extends ../layout
 
 block content
     h1= title
-    form(method='post' action='/add-auction-to-db')
-        label(for='auction_title') Nazwa przetargu
-        br
-        input(type='text' id='auction_title' name='auction_title')
-        br
-        label(for='offers_start') Czas rozpoczęcia przyjmowania ofert
-        br
-        input(type='datetime-local' id='offers_start' name='offers_start')
-        br
-        label(for='offers_stop') Czas zakończenia przyjmowania ofert
-        br
-        input(type='datetime-local' id='offers_stop' name='offers_stop')
-        br
-        textarea(name='description') Opis przetargu
-        br
-        label(for='contracting_party') Instytucja zamawiająca
-        br
-        input(type='text' id='contracting_party' name='contracting_party')
-        br
-        label(for='max_value') Maksymalna zapłata za ofertę
-        br
-        input(type='number' id='max_value' name='max_value' min='0' max='99999999.99' step='0.01')
-        br
-        input(type='submit' value='Dodaj przetarg')
+    form.px-5(method='post' action='/add-auction-to-db')
+        div.mb-3
+            label.form-label(for='auction_title') Nazwa przetargu
+            input.form-control(type='text' id='auction_title' name='auction_title')
+        div.mb-3
+            label.form-label(for='offers_start') Czas rozpoczęcia przyjmowania ofert
+            input.form-control(type='datetime-local' id='offers_start' name='offers_start')
+        div.mb-3
+            label.form-label(for='offers_stop') Czas zakończenia przyjmowania ofert
+            input.form-control(type='datetime-local' id='offers_stop' name='offers_stop')
+        div.mb-3
+            textarea.form-control(name='description') Opis przetargu
+        div.mb-3
+            label.form-label(for='contracting_party') Instytucja zamawiająca
+            input.form-control(type='text' id='contracting_party' name='contracting_party')
+        div.mb-3
+            label.form-label(for='max_value') Maksymalna zapłata za ofertę
+            input.form-control(type='number' id='max_value' name='max_value' min='0' max='99999999.99' step='0.01')
+        input(type='submit' class='btn btn-primary' value='Dodaj przetarg')
